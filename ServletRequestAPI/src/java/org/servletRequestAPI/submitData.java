@@ -78,8 +78,6 @@ for(Cookie c : cookies){
 }
 
 
-
-
         } finally { 
             out.close();
         }
