@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="CBE" type="CBE"/>
+	<xs:complexType name="CBE">
+		<xs:sequence>
+			<xs:element name="ExtendedDataElementType">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="CBE">
+							<xs:sequence>
+								<xs:element name="BpelEv">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="ExtendedDataElementType">
+												<xs:sequence>
+													<xs:element name="TopologyChangedEv">
+														<xs:complexType>
+															<xs:complexContent>
+																<xs:extension base="BpelEv">
+																	<xs:sequence>
+																		<xs:element name="ComponentTopologyChangedEv">
+																			<xs:complexType>
+																				<xs:complexContent>
+																					<xs:extension base="TopologyChangedEv">
+																						<xs:sequence>
+																							<xs:element name="MonitoringAgentStartedEv">
+																								<xs:complexType>
+																									<xs:complexContent>
+																										<xs:extension base="ComponentTopologyChangedEv">
+																											<xs:sequence/>
+																										</xs:extension>
+																									</xs:complexContent>
+																								</xs:complexType>
+																							</xs:element>
+																							<xs:element name="MonitoringAgentStoppedEv">
+																								<xs:complexType>
+																									<xs:complexContent>
+																										<xs:extension base="ComponentTopologyChangedEv">
+																											<xs:sequence/>
+																										</xs:extension>
+																									</xs:complexContent>
+																								</xs:complexType>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:extension>
+																				</xs:complexContent>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="ProcessTopologyChagnedEv">
+																			<xs:complexType>
+																				<xs:complexContent>
+																					<xs:extension base="TopologyChangedEv">
+																						<xs:sequence>
+																							<xs:element name="ProcessDefinitionTopologyChangedEv">
+																								<xs:complexType>
+																									<xs:complexContent>
+																										<xs:extension base="ProcessTopologyChagnedEv">
+																											<xs:sequence>
+																												<xs:element name="ProcessDeployedEv">
+																													<xs:complexType>
+																														<xs:complexContent>
+																															<xs:extension base="ProcessDefinitionTopologyChangedEv">
+																																<xs:sequence/>
+																															</xs:extension>
+																														</xs:complexContent>
+																													</xs:complexType>
+																												</xs:element>
+																												<xs:element name="ProcessUndeployedEv">
+																													<xs:complexType>
+																														<xs:complexContent>
+																															<xs:extension base="ProcessDefinitionTopologyChangedEv">
+																																<xs:sequence/>
+																															</xs:extension>
+																														</xs:complexContent>
+																													</xs:complexType>
+																												</xs:element>
+																											</xs:sequence>
+																										</xs:extension>
+																									</xs:complexContent>
+																								</xs:complexType>
+																							</xs:element>
+																							<xs:element name="ProcessInstanceTopologyChangedEv">
+																								<xs:complexType>
+																									<xs:complexContent>
+																										<xs:extension base="ProcessTopologyChagnedEv">
+																											<xs:sequence>
+																												<xs:element name="ProcessCompletionEv">
+																													<xs:complexType>
+																														<xs:complexContent>
+																															<xs:extension base="ProcessInstanceTopologyChangedEv">
+																																<xs:sequence>
+																																	<xs:element name="fault" type="xs:QName" minOccurs="1" maxOccurs="1"/>
+																																</xs:sequence>
+																															</xs:extension>
+																														</xs:complexContent>
+																													</xs:complexType>
+																												</xs:element>
+																												<xs:element name="ProcessInstanceStartedEv">
+																													<xs:complexType>
+																														<xs:complexContent>
+																															<xs:extension base="ProcessInstanceTopologyChangedEv">
+																																<xs:sequence>
+																																	<xs:element name="rootScopeId" type="xs:long" minOccurs="1" maxOccurs="1"/>
+																																	<xs:element name="scopeDeclarationId" type="xs:int" minOccurs="1" maxOccurs="1"/>
+																																</xs:sequence>
+																															</xs:extension>
+																														</xs:complexContent>
+																													</xs:complexType>
+																												</xs:element>
+																												<xs:element name="ProcessInstanceStateChangeEv">
+																													<xs:complexType>
+																														<xs:complexContent>
+																															<xs:extension base="ProcessInstanceTopologyChangedEv">
+																																<xs:sequence>
+																																	<xs:element name="newState" type="xs:short" minOccurs="1" maxOccurs="1"/>
+																																	<xs:element name="oldState" type="xs:short" minOccurs="1" maxOccurs="1"/>
+																																</xs:sequence>
+																															</xs:extension>
+																														</xs:complexContent>
+																													</xs:complexType>
+																												</xs:element>
+																												<xs:element name="ProcessMessageExchangeEv">
+																													<xs:complexType>
+																														<xs:complexContent>
+																															<xs:extension base="ProcessInstanceTopologyChangedEv">
+																																<xs:sequence>
+																																	<xs:element name="CorrelationMatchEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ProcessMessageExchangeEv">
+																																					<xs:sequence>
+																																						<xs:element name="correlationKeySet" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="NewProcessInstanceEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ProcessMessageExchangeEv">
+																																					<xs:sequence>
+																																						<xs:element name="rootScopeId" type="xs:long" minOccurs="1" maxOccurs="1"/>
+																																						<xs:element name="scopeDeclarationId" type="xs:int" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="aspect" type="xs:short" minOccurs="1" maxOccurs="1">
+																																		<xs:annotation>
+																																			<xs:documentation>todo: Make aspect enum
+                </xs:documentation>
+																																		</xs:annotation>
+																																	</xs:element>
+																																	<xs:element name="messageExchangeId" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																	<xs:element name="operation" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																	<xs:element name="portType" type="xs:QName" minOccurs="1" maxOccurs="1"/>
+																																</xs:sequence>
+																															</xs:extension>
+																														</xs:complexContent>
+																													</xs:complexType>
+																												</xs:element>
+																												<xs:element name="ProcessTerminationEv">
+																													<xs:complexType>
+																														<xs:complexContent>
+																															<xs:extension base="ProcessInstanceTopologyChangedEv">
+																																<xs:sequence/>
+																															</xs:extension>
+																														</xs:complexContent>
+																													</xs:complexType>
+																												</xs:element>
+																											</xs:sequence>
+																										</xs:extension>
+																									</xs:complexContent>
+																								</xs:complexType>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:extension>
+																				</xs:complexContent>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:extension>
+															</xs:complexContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="MonitoringSubscriptionEv">
+														<xs:complexType>
+															<xs:complexContent>
+																<xs:extension base="BpelEv">
+																	<xs:sequence>
+																		<xs:element name="ConsoleSubscriptionEv">
+																			<xs:complexType>
+																				<xs:complexContent>
+																					<xs:extension base="MonitoringSubscriptionEv">
+																						<xs:sequence/>
+																					</xs:extension>
+																				</xs:complexContent>
+																			</xs:complexType>
+																		</xs:element>
+																		<xs:element name="DbSubscriptionEv">
+																			<xs:complexType>
+																				<xs:complexContent>
+																					<xs:extension base="MonitoringSubscriptionEv">
+																						<xs:sequence/>
+																					</xs:extension>
+																				</xs:complexContent>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:extension>
+															</xs:complexContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="ProcessMonitoringEv">
+														<xs:complexType>
+															<xs:complexContent>
+																<xs:extension base="BpelEv">
+																	<xs:sequence>
+																		<xs:element name="ProcessEv">
+																			<xs:complexType>
+																				<xs:complexContent>
+																					<xs:extension base="ProcessMonitoringEv">
+																						<xs:sequence>
+																							<xs:element name="CorrelationEv">
+																								<xs:complexType>
+																									<xs:complexContent>
+																										<xs:extension base="ProcessEv">
+																											<xs:sequence>
+																												<xs:element name="CorrelationNoMatchEv">
+																													<xs:complexType>
+																														<xs:complexContent>
+																															<xs:extension base="CorrelationEv">
+																																<xs:sequence>
+																																	<xs:element name="keySet" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																</xs:sequence>
+																															</xs:extension>
+																														</xs:complexContent>
+																													</xs:complexType>
+																												</xs:element>
+																												<xs:element name="messageExchangeId" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																												<xs:element name="operation" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																												<xs:element name="portType" type="xs:QName" minOccurs="1" maxOccurs="1"/>
+																											</xs:sequence>
+																										</xs:extension>
+																									</xs:complexContent>
+																								</xs:complexType>
+																							</xs:element>
+																							<xs:element name="ProcessInstanceEv">
+																								<xs:complexType>
+																									<xs:complexContent>
+																										<xs:extension base="ProcessEv">
+																											<xs:sequence>
+																												<xs:element name="ScopeEv">
+																													<xs:complexType>
+																														<xs:complexContent>
+																															<xs:extension base="ProcessInstanceEv">
+																																<xs:sequence>
+																																	<xs:element name="ActivityEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ScopeEv">
+																																					<xs:sequence>
+																																						<xs:element name="activityDeclarationId" type="xs:int" minOccurs="1" maxOccurs="1"/>
+																																						<xs:element name="activityId" type="xs:long" minOccurs="1" maxOccurs="1"/>
+																																						<xs:element name="activityName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																						<xs:element name="activityType" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="ActivityEnabledEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ActivityEv">
+																																					<xs:sequence/>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="ActivityExecEndEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ActivityEv">
+																																					<xs:sequence/>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="ActivityExecStartEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ActivityEv">
+																																					<xs:sequence/>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="ActivityFailureEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ActivityEv">
+																																					<xs:sequence/>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="ActivityRecoveryEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ActivityEv">
+																																					<xs:sequence/>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="CompensationHandlerRegisteredEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ScopeEv">
+																																					<xs:sequence/>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="CorrelationSetEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ScopeEv">
+																																					<xs:sequence>
+																																						<xs:element name="_correlationSetName " type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="CorrelationSetWriteEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="CorrelationSetEv">
+																																					<xs:sequence>
+																																						<xs:element name="key" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="ExpressionEvaluationEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ScopeEv">
+																																					<xs:sequence>
+																																						<xs:element name="expression" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="ExpressionEvaluationFailedEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ExpressionEvaluationEv">
+																																					<xs:sequence>
+																																						<xs:element name="fault" type="xs:QName" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="ExpressionEvaluationSuccessEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ExpressionEvaluationEv">
+																																					<xs:sequence>
+																																						<xs:element name="result" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="PartnerLinkEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ScopeEv">
+																																					<xs:sequence>
+																																						<xs:element name="linkName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="PartnerLinkModificationEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="PartnerLinkEv">
+																																					<xs:sequence/>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="ScopeCompletionEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ScopeEv">
+																																					<xs:sequence>
+																																						<xs:element name="fault" type="xs:QName" minOccurs="1" maxOccurs="1"/>
+																																						<xs:element name="success" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="ScopeFaultEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ScopeEv">
+																																					<xs:sequence>
+																																						<xs:element name="explanation" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																						<xs:element name="faultLineNo" type="xs:int" minOccurs="1" maxOccurs="1"/>
+																																						<xs:element name="faultType" type="xs:QName" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="ScopeStartEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ScopeEv">
+																																					<xs:sequence/>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="VariableEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="ScopeEv">
+																																					<xs:sequence>
+																																						<xs:element name="varName" type="xs:int" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="VariableModificationEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="VariableEv">
+																																					<xs:sequence>
+																																						<xs:element name="newValue" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																					</xs:sequence>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="VariableReadEv">
+																																		<xs:complexType>
+																																			<xs:complexContent>
+																																				<xs:extension base="VariableEv">
+																																					<xs:sequence/>
+																																				</xs:extension>
+																																			</xs:complexContent>
+																																		</xs:complexType>
+																																	</xs:element>
+																																	<xs:element name="parentScopeId" type="xs:long" minOccurs="1" maxOccurs="1"/>
+																																	<xs:element name="parentScopeNames" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																	<xs:element name="scopeDeclarationId" type="xs:int" minOccurs="1" maxOccurs="1"/>
+																																	<xs:element name="scopeId" type="xs:long" minOccurs="1" maxOccurs="1"/>
+																																	<xs:element name="scopeName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																																</xs:sequence>
+																															</xs:extension>
+																														</xs:complexContent>
+																													</xs:complexType>
+																												</xs:element>
+																												<xs:element name="processInstanceId" type="xs:long" minOccurs="1" maxOccurs="1"/>
+																												<xs:element name="type" type="xs:string" minOccurs="1" maxOccurs="1"/>
+																											</xs:sequence>
+																										</xs:extension>
+																									</xs:complexContent>
+																								</xs:complexType>
+																							</xs:element>
+																							<xs:element name="processId" type="xs:QName" minOccurs="1" maxOccurs="1"/>
+																							<xs:element name="processName" type="xs:QName" minOccurs="1" maxOccurs="1"/>
+																						</xs:sequence>
+																					</xs:extension>
+																				</xs:complexContent>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:extension>
+															</xs:complexContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="lineNo" type="xs:int" minOccurs="1" maxOccurs="1"/>
+													<xs:element name="timestamp" type="xs:date" minOccurs="1" maxOccurs="1"/>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
+
+
+
+	<!--
+		< ?xml version="1.0" encoding="UTF-8"?> <xsd:schema
+		xmlns="bpel.cbe.api.backbone.sensors.as3.agh.edu.pl"
+		targetNamespace="bpel.cbe.api.backbone.sensors.as3.agh.edu.pl"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		xmlns:cbe_bpel="bpel.cbe.api.backbone.sensors.as3.agh.edu.pl"
+		xmlns:cbe="cbe.api.backbone.sensors.as3.agh.edu.pl"
+		xmlns:topo_bpel="bpel.topology.api.backbone.sensors.as3.agh.edu.pl"
+		xmlns:ms="ms.api.backbone.sensors.as3.agh.edu.pl" version="1.0.1"
+		elementFormDefault="qualified"> <xsd:import
+		schemaLocation="TopologyBpel.xsd"
+		namespace="bpel.topology.api.backbone.sensors.as3.agh.edu.pl" />
+
+		<xsd:import schemaLocation="MonitoringSubscription.xsd"
+		namespace="ms.api.backbone.sensors.as3.agh.edu.pl" /> <xsd:import
+		schemaLocation="Cbe.xsd"
+		namespace="cbe.api.backbone.sensors.as3.agh.edu.pl" />
+
+		<xsd:complexType name="BpelTopologyChangedEvData">
+		<xsd:complexContent> <xsd:extension base="cbe:TopologyChangedEvData">
+		<xsd:sequence> <xsd:element ref="topo_bpel:TopologyBPEL" />
+		</xsd:sequence> </xsd:extension> </xsd:complexContent>
+		</xsd:complexType> <xsd:complexType name="BpelMsEvData">
+		<xsd:complexContent> <xsd:extension base="cbe:MsEvData" >
+		<xsd:sequence> <xsd:element name="values" minOccurs="1"
+		maxOccurs="unbounded" type="xsd:integer" /> </xsd:sequence>
+		<xsd:attribute name="measurement_name" type="xsd:string" />
+		<xsd:attribute name="timestamp" type="xsd:long" /> </xsd:extension>
+		</xsd:complexContent> </xsd:complexType> </xsd:schema>
+	-->

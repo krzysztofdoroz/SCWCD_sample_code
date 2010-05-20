@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="0.04" errors="0" skipped="0" tests="1" name="pl.edu.agh.filteringeventsjms.AppTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/i386"/>
+    <property name="java.vm.version" value="14.2-b01"/>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/home/krzysztof/SCWCD_sample_code/FilteringEventsJMS"/>
+    <property name="java.runtime.version" value="1.6.0_16-b01"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="basedir" value="/home/krzysztof/SCWCD_sample_code/FilteringEventsJMS"/>
+    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/endorsed"/>
+    <property name="os.arch" value="i386"/>
+    <property name="surefire.real.class.path" value="/tmp/surefirebooter8375632170864231227.jar"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="os.name" value="Linux"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/i386/server:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/i386:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/../lib/i386:/usr/java/packages/lib/i386:/lib:/usr/lib"/>
+    <property name="surefire.test.class.path" value="/home/krzysztof/SCWCD_sample_code/FilteringEventsJMS/target/test-classes:/home/krzysztof/SCWCD_sample_code/FilteringEventsJMS/target/classes:/home/krzysztof/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/home/krzysztof/.m2/repository/org/apache/activemq/activemq-core/5.3.0/activemq-core-5.3.0.jar:/home/krzysztof/.m2/repository/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.jar:/home/krzysztof/.m2/repository/org/apache/geronimo/specs/geronimo-jms_1.1_spec/1.1.1/geronimo-jms_1.1_spec-1.1.1.jar:/home/krzysztof/.m2/repository/org/apache/activemq/activeio-core/3.1.2/activeio-core-3.1.2.jar:/home/krzysztof/.m2/repository/org/apache/geronimo/specs/geronimo-j2ee-management_1.1_spec/1.0.1/geronimo-j2ee-management_1.1_spec-1.0.1.jar:/home/krzysztof/.m2/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar:/home/krzysztof/.m2/repository/log4j/log4j/1.2.12/log4j-1.2.12.jar:/home/krzysztof/.m2/repository/logkit/logkit/1.0.1/logkit-1.0.1.jar:/home/krzysztof/.m2/repository/avalon-framework/avalon-framework/4.1.3/avalon-framework-4.1.3.jar:/home/krzysztof/.m2/repository/javax/servlet/servlet-api/2.3/servlet-api-2.3.jar:/home/krzysztof/.m2/repository/org/apache/activemq/kahadb/5.3.0/kahadb-5.3.0.jar:/home/krzysztof/.m2/repository/org/apache/activemq/protobuf/activemq-protobuf/1.0/activemq-protobuf-1.0.jar:/home/krzysztof/.m2/repository/org/apache/geronimo/specs/geronimo-j2ee-management_1.0_spec/1.0/geronimo-j2ee-management_1.0_spec-1.0.jar:/home/krzysztof/.m2/repository/org/springframework/spring-context/2.5.6/spring-context-2.5.6.jar:/home/krzysztof/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/home/krzysztof/.m2/repository/org/springframework/spring-beans/2.5.6/spring-beans-2.5.6.jar:/home/krzysztof/.m2/repository/org/springframework/spring-core/2.5.6/spring-core-2.5.6.jar:/home/krzysztof/.m2/repository/commons-net/commons-net/2.0/commons-net-2.0.jar:"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot Tiered Compilers"/>
+    <property name="os.version" value="2.6.28-18-generic"/>
+    <property name="user.home" value="/home/krzysztof"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="user.name" value="krzysztof"/>
+    <property name="java.class.path" value="/home/krzysztof/SCWCD_sample_code/FilteringEventsJMS/target/test-classes:/home/krzysztof/SCWCD_sample_code/FilteringEventsJMS/target/classes:/home/krzysztof/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/home/krzysztof/.m2/repository/org/apache/activemq/activemq-core/5.3.0/activemq-core-5.3.0.jar:/home/krzysztof/.m2/repository/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.jar:/home/krzysztof/.m2/repository/org/apache/geronimo/specs/geronimo-jms_1.1_spec/1.1.1/geronimo-jms_1.1_spec-1.1.1.jar:/home/krzysztof/.m2/repository/org/apache/activemq/activeio-core/3.1.2/activeio-core-3.1.2.jar:/home/krzysztof/.m2/repository/org/apache/geronimo/specs/geronimo-j2ee-management_1.1_spec/1.0.1/geronimo-j2ee-management_1.1_spec-1.0.1.jar:/home/krzysztof/.m2/repository/commons-logging/commons-logging/1.1/commons-logging-1.1.jar:/home/krzysztof/.m2/repository/log4j/log4j/1.2.12/log4j-1.2.12.jar:/home/krzysztof/.m2/repository/logkit/logkit/1.0.1/logkit-1.0.1.jar:/home/krzysztof/.m2/repository/avalon-framework/avalon-framework/4.1.3/avalon-framework-4.1.3.jar:/home/krzysztof/.m2/repository/javax/servlet/servlet-api/2.3/servlet-api-2.3.jar:/home/krzysztof/.m2/repository/org/apache/activemq/kahadb/5.3.0/kahadb-5.3.0.jar:/home/krzysztof/.m2/repository/org/apache/activemq/protobuf/activemq-protobuf/1.0/activemq-protobuf-1.0.jar:/home/krzysztof/.m2/repository/org/apache/geronimo/specs/geronimo-j2ee-management_1.0_spec/1.0/geronimo-j2ee-management_1.0_spec-1.0.jar:/home/krzysztof/.m2/repository/org/springframework/spring-context/2.5.6/spring-context-2.5.6.jar:/home/krzysztof/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/home/krzysztof/.m2/repository/org/springframework/spring-beans/2.5.6/spring-beans-2.5.6.jar:/home/krzysztof/.m2/repository/org/springframework/spring-core/2.5.6/spring-core-2.5.6.jar:/home/krzysztof/.m2/repository/commons-net/commons-net/2.0/commons-net-2.0.jar:"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="32"/>
+    <property name="java.home" value="/usr/lib/jvm/java-6-sun-1.6.0.16/jre"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="en"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.6.0_16"/>
+    <property name="java.ext.dirs" value="/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/resources.jar:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/rt.jar:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/jsse.jar:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/jce.jar:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/lib/charsets.jar:/usr/lib/jvm/java-6-sun-1.6.0.16/jre/classes"/>
+    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="localRepository" value="/home/krzysztof/.m2/repository"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="gnome"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="0.009" classname="pl.edu.agh.filteringeventsjms.AppTest" name="testApp"/>
+</testsuite>
