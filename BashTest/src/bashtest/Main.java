@@ -5,7 +5,10 @@
 
 package bashtest;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -22,41 +25,67 @@ public class Main {
      */
     public static void main(String[] args) throws IOException, InterruptedException {
 
-/*
-        Runtime rtime = Runtime.getRuntime();
-        Process child = rtime.exec("/bin/bash");
 
-        BufferedWriter outCommand = new BufferedWriter(new
-        OutputStreamWriter(child.getOutputStream()));
-        outCommand.write("/home/krzysztof/NetBeansProjects/BashTest/MyShellScript.sh");
-        outCommand.flush();
+        String cmd = "qsub -W stagein=Hello.class@localhost:/home/students/krdoroz/lab3/Hello.class hello.sh"; // this is the command to execute in the Unix shell
+        // create a process for the shell
+        ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
+        pb.redirectErrorStream(true); // use this to capture messages sent to stderr
+        Process shell = pb.start();
+        InputStream shellIn = shell.getInputStream(); // this captures the output from the command
+        int shellExitStatus = shell.waitFor(); // wait for the shell to finish and get the return code
+        // at this point you can process the output issued by the command
+        // for instance, this reads the output and writes it to System.out:
+        int c;
 
-        System.out.print("WTF");
-InputStream str =  child.getInputStream();
+        byte[] nazwa = new byte[32];
 
-       
+        int dl =  shellIn.read(nazwa);
 
-child.waitFor();
- System.out.print(str.read());
+        String pr = new String(nazwa,0,dl);
 
-    int retCode = child.exitValue();
+        System.out.println( pr);
 
-    System.out.print(retCode);
+        String numerProcesu = pr.split("\\.")[0];
+        //for(String s: pr.split("\\."))
+        //    System.out.println(s);
 
-*/
-        String cmd = "/home/krzysztof/NetBeansProjects/BashTest/MyShellScript.sh"; // this is the command to execute in the Unix shell
-// create a process for the shell
-ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
-pb.redirectErrorStream(true); // use this to capture messages sent to stderr
-Process shell = pb.start();
-InputStream shellIn = shell.getInputStream(); // this captures the output from the command
-int shellExitStatus = shell.waitFor(); // wait for the shell to finish and get the return code
-// at this point you can process the output issued by the command
-// for instance, this reads the output and writes it to System.out:
-int c;
-while ((c = shellIn.read()) != -1) {System.out.write(c);}
-// close the stream
-try {shellIn.close();} catch (IOException ignoreMe) {}
+
+        System.out.println(numerProcesu);
+
+
+        Integer numer = Integer.parseInt(numerProcesu);
+
+        System.out.println(numer);
+
+
+        // close the stream
+        try {
+            shellIn.close();
+        } catch (IOException ignoreMe) {
+            ignoreMe.printStackTrace();
+        }
+
+        //czekamy na plik z wynikiem:
+
+        File result = new File("task.o" + numer);
+
+        while ( !result.exists()){
+            try{
+                Thread.sleep(1000);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+
+        }
+
+        BufferedReader reader = new BufferedReader(new FileReader(result));
+
+        System.out.println(reader.readLine());
+
+
     }
-
 }
+
+
+
+
