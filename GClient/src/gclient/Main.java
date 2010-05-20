@@ -1,28 +1,29 @@
-package activeworker;
+package gclient;
 
 import java.util.Properties;
-import java.util.Random;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import javax.jms.JMSException;
-import javax.jms.Message;
 import javax.jms.Destination;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
-import javax.jms.Session;
-import javax.jms.MessageConsumer;
+import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
+import javax.jms.Session;
+import javax.jms.TextMessage;
 import task.Task;
 
 
 
 public class Main {
 
-    public static final int PRECISSION = 1000;
-
-
+    /**
+     * Main line.
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args) throws NamingException {
         Context context = null;
         ConnectionFactory factory = null;
@@ -30,24 +31,23 @@ public class Main {
         String factoryName = "ConnectionFactory";
         String destName = null;
         Destination dest = null;
+        int count = 1;
         Session session = null;
-        MessageConsumer receiver = null;
-
-        
-
-        destName = "ClientRequests";
-
+        MessageProducer sender = null;
+        String text = "Message ";
 
          Properties props = new Properties();
     props.put( Context.INITIAL_CONTEXT_FACTORY, "org.exolab.jms.jndi.InitialContextFactory" );
     props.put( Context.PROVIDER_URL, "rmi://localhost:1299" );
-
+    
     //create initial context
     context = new InitialContext( props );
 
+        count = 1;
+        destName = "ClientRequests";
 
         try {
-            
+           
             // look up the ConnectionFactory
             factory = (ConnectionFactory) context.lookup(factoryName);
 
@@ -61,26 +61,26 @@ public class Main {
             session = connection.createSession(
                 false, Session.AUTO_ACKNOWLEDGE);
 
-            // create the receiver
-            receiver = session.createConsumer(dest);
+            // create the sender
+            sender = session.createProducer(dest);
 
-            // start the connection, to enable message receipt
+            // start the connection, to enable message sends
             connection.start();
 
-           
-                Message message = receiver.receive();
-                if (message instanceof ObjectMessage) {
-                    ObjectMessage task = (ObjectMessage) message;
+            for (int i = 0; i < count; ++i) {
+                ObjectMessage message = session.createObjectMessage();
 
-                    System.out.print(task.getObject().getClass());
-                    Task t = (Task)task.getObject();
-                    computeAndSend(t);
+                Task task = new Task();
+                task.setA(1);
+                task.setB(0);
+                task.setC(0);
+                task.setL(0);
+                task.setR(1);
 
-                    System.out.println("Received message" );
-                } else if (message != null) {
-                    System.out.println("Received non object message");
-                }
-            
+                message.setObject(task);
+                sender.send(message);
+                System.out.println("Sent message ");
+            }
         } catch (JMSException exception) {
             exception.printStackTrace();
         } catch (NamingException exception) {
@@ -105,51 +105,5 @@ public class Main {
             }
         }
     }
-
-    static double calculateFx(double a, double b, double c, double x){
-
-        return a*x*x + b*x + c;
-    }
-
-    static void computeAndSend(Task task){
-
-        double x;
-        double y;
-        int counter = 0;
-
-        Random rand = new Random();
-
-        for(int i = 0; i < PRECISSION; i++){
-            int a = rand.nextInt() % 1000;
-            int b = rand.nextInt() % 1000;
-
-            if (b == 0)
-                b = 1;
-
-            x = a/b;
-            if (x < 0)
-                x = -x;
-
-            a = rand.nextInt() % 1000;
-            b = rand.nextInt() % 1000;
-
-            if (b == 0)
-                b = 1;
-            
-            y = a/b;
-            if (y < 0)
-                y = -y;
-
-            if ( y < calculateFx(task.getA(), task.getB(), task.getC(), x))
-                counter++;
-
-            
-        }
-        
-System.out.println((double)counter/PRECISSION);
-
-
-    }
-
 
 }
