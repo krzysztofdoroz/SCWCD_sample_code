@@ -1,7 +1,13 @@
 package activeworker;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -74,7 +80,33 @@ public class Main {
 
                     System.out.print(task.getObject().getClass());
                     Task t = (Task)task.getObject();
-                    computeAndSend(t);
+                    
+                    BufferedWriter out;
+                try {
+                    out = new BufferedWriter(new FileWriter(new File("data.in")));
+
+                    out.write(new Double(t.getA()).toString());
+                    out.write("\n");
+                    out.write(new Double(t.getB()).toString());
+                    out.write("\n");
+                    out.write(new Double(t.getC()).toString());
+                    out.write("\n");
+                    out.write(new Double(t.getL()).toString());
+                    out.write("\n");
+                    out.write(new Double(t.getR()).toString());
+                    out.write("\n");
+                    //TODO: refactor!
+                    out.write(new Integer(10000).toString());
+                    out.write("\n");
+
+                    out.close();
+
+                } catch (IOException ex) {
+                    System.out.println("Exception occured while writing to data.in");
+                }
+                    
+
+                    //computeAndSend(t);
 
                     System.out.println("Received message" );
                 } else if (message != null) {
