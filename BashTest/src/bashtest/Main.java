@@ -26,7 +26,7 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
 
 
-        String cmd = "qsub -W stagein=Hello.class@localhost:/home/students/krdoroz/lab3/Hello.class hello.sh"; // this is the command to execute in the Unix shell
+        String cmd = "qsub -W stagein=MonteCarlo.class@localhost:/home/students/krdoroz/lab3/MonteCarlo.class,data.in@localhost:/home/students/krdoroz/lab3/data.in hello.sh"; // this is the command to execute in the Unix shell
         // create a process for the shell
         ProcessBuilder pb = new ProcessBuilder("bash", "-c", cmd);
         pb.redirectErrorStream(true); // use this to capture messages sent to stderr
@@ -80,7 +80,9 @@ public class Main {
 
         BufferedReader reader = new BufferedReader(new FileReader(result));
 
-        System.out.println(reader.readLine());
+        String line = "";
+        while ( (line = reader.readLine()) != null)
+            System.out.println(line);
 
 
     }
