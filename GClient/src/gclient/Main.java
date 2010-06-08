@@ -12,26 +12,41 @@ import javax.jms.ConnectionFactory;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 import task.Task;
 
 
 
 public class Main {
 
-    /**
-     * Main line.
-     *
-     * @param args command line arguments
-     */
+    public static final int COUNT = 1;
+
+
     public static void main(String[] args) throws NamingException {
-        Context context = null;
+
+        sendRequests();
+
+
+
+    }
+
+    static void getResuls(){
+
+        for(int i = 0; i < COUNT; i++){
+            
+        }
+
+
+    }
+
+
+    static void sendRequests() throws NamingException{
+          Context context = null;
         ConnectionFactory factory = null;
         Connection connection = null;
         String factoryName = "ConnectionFactory";
         String destName = null;
         Destination dest = null;
-        int count = 1;
+        
         Session session = null;
         MessageProducer sender = null;
         String text = "Message ";
@@ -39,15 +54,15 @@ public class Main {
          Properties props = new Properties();
     props.put( Context.INITIAL_CONTEXT_FACTORY, "org.exolab.jms.jndi.InitialContextFactory" );
     props.put( Context.PROVIDER_URL, "rmi://localhost:1299" );
-    
+
     //create initial context
     context = new InitialContext( props );
 
-        count = 1;
+       
         destName = "ClientRequests";
 
         try {
-           
+
             // look up the ConnectionFactory
             factory = (ConnectionFactory) context.lookup(factoryName);
 
@@ -67,10 +82,10 @@ public class Main {
             // start the connection, to enable message sends
             connection.start();
 
-            for (int i = 0; i < count; ++i) {
+            for (int i = 0; i < COUNT; ++i) {
                 ObjectMessage message = session.createObjectMessage();
 
-                Task task = new Task();
+                task.Task task = new task.Task();
                 task.setA(1);
                 task.setB(0);
                 task.setC(0);
